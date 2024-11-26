@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block title %}
+        <title>layout</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% include('_nav.html') %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div id="messageModal" class="modal">
+            <div class="modal-content">
+                {% for categorie, message in messages %}
+                    <div role="alert" class="alert {{ categorie }}">
+                        Information : <strong>{{ message|safe }}</strong>
+                    </div>
+                {% endfor %}
+                <button class="close-btn" onclick="closeModal()">OK</button>
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
+{% block body %}
+    <h2 style="color:blue">layout.html</h2>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        // Show the modal when there is a message
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('messageModal');
+            if (modal) {
+                modal.style.display = 'block';
+            }
+        });
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.getElementById('messageModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+{% endblock %}
+</body>
+</html>
