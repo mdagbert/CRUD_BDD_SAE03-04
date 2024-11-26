@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.secret_key = 'une cle(token) : grain de sel(any random string)'
 
-
+# test
 @app.route('/')
 def show_accueil():
     return render_template('layout.html')
